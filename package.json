@@ -1,10 +1,14 @@
 {
   "name": "@orkans/utilsjs",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Bunch of scripts collected from all around the JS world.",
   "author": "Orkan <orkans+utilsjs@gmail.com>",
   "repository": "git@github.com:orkan/utilsjs.git",
   "license": "MIT",
   "type": "module",
-  "main": "index.mjs"
+  "main": "index.mjs",
+  "prettier": "@orkans/prettier-config",
+  "devDependencies": {
+    "@orkans/prettier-config": "github:orkan/prettier-config#2.0.0"
+  }
 }

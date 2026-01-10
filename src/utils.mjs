@@ -1,6 +1,6 @@
 /*
  * This file is part of the @orkans/utilsjs package.
- * Copyright (c) 2023-2023 Orkan <orkans+utilsjs@gmail.com>
+ * Copyright (c) 2023-2026 Orkan <orkans+utilsjs@gmail.com>
  */
 
 /**
@@ -27,7 +27,7 @@ export function arrRepeat(arr, repeats) {
  */
 export function arrShuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(rand(0, i));
+    const j = rand(0, i);
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
@@ -53,6 +53,21 @@ export function objNested(base, names, value = null) {
   for (let i = 0; i < names.length; i++) {
     base = base[names[i]] = i == names.length - 1 ? value : {};
   }
+}
+
+/**
+ * Map over Object.
+ * @link // https://stackoverflow.com/questions/14810506/map-function-for-objects-instead-of-arrays
+ *
+ * @param callbackFn A function to execute for each object entry.
+ * Its return value will replace previous object entry.
+ * The function is called with the following arguments:
+ * - value: The value of current object entry.
+ * - index: The index of current object entry.
+ * - object: The original object.
+ */
+export function objMap(o, callbackFn) {
+  return Object.fromEntries(Object.entries(o).map(([k, v]) => [k, callbackFn(v, k, o)]));
 }
 
 /**

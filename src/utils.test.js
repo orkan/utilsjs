@@ -1,6 +1,6 @@
 /*
  * This file is part of the @orkans/utilsjs package.
- * Copyright (c) 2023-2023 Orkan <orkans+utilsjs@gmail.com>
+ * Copyright (c) 2023-2026 Orkan <orkans+utilsjs@gmail.com>
  */
 import * as utils from '@orkans/utilsjs';
 
@@ -27,13 +27,6 @@ utils.testDataSet(
     expect(utils.arrPadR(data.arr, data.pad, data.str)).toEqual(data.out);
   }
 );
-
-/**
- * arrPadR()
- */
-utils.testDataSet('testDataSet()', { a: 'a1', b: 'b1' }, (data) => {
-  expect(data).toEqual(data);
-});
 
 /**
  * arrRepeat()
@@ -70,7 +63,7 @@ test('arrShuffle()', () => {
   const out = utils.arrShuffle([...arr]);
   arr.sort();
   out.sort();
-  expect(out).toEqual(arr);
+  expect(arr).toEqual(out);
 });
 
 /**
@@ -86,7 +79,20 @@ test('objNested()', () => {
       },
     },
   };
-  expect(out).toEqual(obj);
+  expect(obj).toEqual(out);
+});
+
+/**
+ * objMap()
+ */
+test('objMap()', () => {
+  const tmp = { a: 1, b: 2, c: 3 };
+  const out = { a: 'a1', b: 'b2', c: 'c3' };
+  const obj = utils.objMap(tmp, (v, k) => k + v);
+  expect(obj).toEqual(out);
+
+  // Check for original object
+  utils.objMap(tmp, (v, k, o) => expect(o).toEqual(tmp));
 });
 
 /**
