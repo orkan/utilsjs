@@ -7,4 +7,4 @@
  * @see https://stackoverflow.com/questions/55688736/correct-way-to-import-and-export-javascript-function-library-module-redirect
  * @see node_modules/react
  */
-export * from "./src/utils.mjs";
+export * from "./src/utils.js";
