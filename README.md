@@ -1,4 +1,4 @@
-# @orkans/utilsjs `v4.0.0`
+# @orkans/utilsjs `v4.1.0`
 
 Bunch of scripts collected from all around the JS world.
 
@@ -32,4 +32,4 @@ MIT
 
 ### Updated
 
-Sun, 11 Jan 2026 11:00:59 +01:00
+Fri, 16 Jan 2026 16:49:37 +01:00

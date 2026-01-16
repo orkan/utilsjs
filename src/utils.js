@@ -34,6 +34,14 @@ export function arrShuffle(arr) {
 }
 
 /**
+ * Returns trailing name component of path.
+ * @link https://stackoverflow.com/questions/3820381/need-a-basename-function-in-javascript
+ */
+export function pathBasename(path) {
+  return path.split(/[\\/]/).pop();
+}
+
+/**
  * Dynamically create nested objects using object names given by an array.
  * @link // https://stackoverflow.com/questions/5484673/javascript-how-to-dynamically-create-nested-objects-using-object-names-given-by
  * Example:

@@ -67,6 +67,34 @@ test('arrShuffle()', () => {
 });
 
 /**
+ * pathBasename()
+ */
+utils.testDataSet(
+  'pathBasename()',
+  {
+    '1: /a.txt': {
+      var: '/a.txt',
+      out: 'a.txt',
+    },
+    '2: /a/b.txt': {
+      var: '/a/b.txt',
+      out: 'b.txt',
+    },
+    '3: D:/a/b/c': {
+      var: 'D:/a/b/c',
+      out: 'c',
+    },
+    '4: info.doc': {
+      var: 'info.doc',
+      out: 'info.doc',
+    },
+  },
+  (data) => {
+    expect(utils.pathBasename(data.var)).toEqual(data.out);
+  }
+);
+
+/**
  * objNested()
  */
 test('objNested()', () => {
