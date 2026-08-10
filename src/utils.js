@@ -1,6 +1,6 @@
 /*
  * This file is part of the @orkans/utilsjs package.
- * Copyright (c) 2023-2026 Orkan <orkans+utilsjs@gmail.com>
+ * Copyright (c) 2023 Orkan <orkans+utilsjs@gmail.com>
  */
 
 /**
@@ -92,6 +92,14 @@ export function objReduce(obj, keys) {
 }
 
 /**
+ * Filter all falsy elements.
+ * @link https://stackoverflow.com/questions/286141/remove-blank-attributes-from-an-object-in-javascript
+ */
+export function objFilter(obj) {
+  return Object.entries(obj).reduce((a, [k, v]) => (v ? ((a[k] = v), a) : a), {});
+}
+
+/**
  * Get random integer between two values (inclusive).
  * @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#getting_a_random_integer_between_two_values_inclusive
  */
@@ -119,10 +127,22 @@ export async function usleep(ms) {
   );
 }
 
+/**
+ * BODY:onload() callback.
+ */
+export function wndOnLoad(fn) {
+  if (typeof window === 'object') {
+    window.onload = fn;
+  }
+}
+
 /*
  * ============================================================================
  * TESTS
  * ============================================================================
+ * Tips:
+ * Detect tets env: process.env.MODE === 'test'
+ * Detect browser env: typeof window === 'object'
  */
 
 /**

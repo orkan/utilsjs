@@ -1,4 +1,4 @@
-# @orkans/utilsjs `v4.1.0`
+# @orkans/utilsjs `v4.2.0`
 
 Bunch of scripts collected from all around the JS world.
 
@@ -14,7 +14,7 @@ Bunch of scripts collected from all around the JS world.
 
 * Running custom NodeJS scripts.
 
-  Most scripts are defined in package.json file, including: `test`, `arrShuffle`, etc... These can be ran from root dir with `npm run <label>`. Those that require debuging are repeated in `launch.json` file. However, DEBUG mode doesn't load `Console` module, hence console?.log() notation.
+  Most scripts is defined in package.json file, including: `test`, `arrShuffle`, etc... These can be ran from root dir with `npm run <label>`. Those that require debuging are repeated in `launch.json` file. However, DEBUG mode doesn't load `Console` module, hence console?.log() notation.
 
 ## About
 
@@ -32,4 +32,4 @@ MIT
 
 ### Updated
 
-Fri, 16 Jan 2026 16:49:37 +01:00
+Mon, 10 Aug 2026 06:01:43 +02:00
