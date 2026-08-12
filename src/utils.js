@@ -34,6 +34,31 @@ export function arrShuffle(arr) {
 }
 
 /**
+ * Cache: Put.
+ */
+export function cachePut(key, val) {
+  localStorage.setItem(key, JSON.stringify(val));
+}
+
+/**
+ * Cache: Get.
+ */
+export function cacheGet(key) {
+  const val = localStorage.getItem(key);
+  const out = val ? JSON.parse(val) : null;
+  return out;
+}
+
+/**
+ * Display/suppress debug messages.
+ */
+export function debug(message, data = null) {
+  if (console.debug) {
+    data ? console.debug(message, data) : console.debug(message);
+  }
+}
+
+/**
  * Returns trailing name component of path.
  * @link https://stackoverflow.com/questions/3820381/need-a-basename-function-in-javascript
  */
