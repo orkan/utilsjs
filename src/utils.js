@@ -59,6 +59,18 @@ export function debug(message, data = null) {
 }
 
 /**
+ * Properly display text in html elements like: INPUT, DIV, A, etc...
+ */
+export function setText(el, s = '') {
+  const key = 'value' in el ? 'value' : 'innerHTML';
+  el[key] = s;
+  if (s && 'href' in el) {
+    const Url = new URL(s);
+    el.href = Url.href;
+  }
+}
+
+/**
  * Returns trailing name component of path.
  * @link https://stackoverflow.com/questions/3820381/need-a-basename-function-in-javascript
  */

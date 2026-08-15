@@ -4,8 +4,8 @@
  */
 import * as utils from './utils.js';
 
+const _cache = {};
 const _loading = {};
-const _fetchCache = {};
 
 // ================================================================================================
 // DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA
@@ -70,9 +70,9 @@ export async function fetchJson(url, body = null, opts = {}) {
   cfg.debug && debug('fetchJson() req:', { url, opts });
   url in _loading ? _loading[url]++ : (_loading[url] = 1);
 
-  if (opts.ajax.cache in _fetchCache) {
+  if (opts.ajax.cache in _cache) {
     cfg.debug && debug(`fetchJson() cache hit: ${opts.ajax.cache}`);
-    data = _fetchCache[opts.ajax.cache];
+    data = _cache[opts.ajax.cache];
   } else {
     try {
       const res = await fetch(url, opts.fetch);
@@ -81,7 +81,7 @@ export async function fetchJson(url, body = null, opts = {}) {
       error = data.error ? `API: ${data.error}` : null;
       data = data.data;
       if (opts.ajax.cache) {
-        _fetchCache[opts.ajax.cache] = data;
+        _cache[opts.ajax.cache] = data;
       }
     } catch (er) {
       error = `JS: ${er.message}`;
