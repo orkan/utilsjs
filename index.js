@@ -8,3 +8,5 @@
  * @see node_modules/react
  */
 export * from "./src/utils.js";
+export * from "./src/ajax.js";
+export * from "./version.js";

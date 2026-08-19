@@ -50,15 +50,6 @@ export function cacheGet(key) {
 }
 
 /**
- * Display/suppress debug messages.
- */
-export function debug(message, data = null) {
-  if (console.debug) {
-    data ? console.debug(message, data) : console.debug(message);
-  }
-}
-
-/**
  * Properly display text in html elements like: INPUT, DIV, A, etc...
  */
 export function setText(el, s = '') {
@@ -143,7 +134,7 @@ export function objFilter(obj) {
 export function rand(min = 0, max = 1) {
   min = Math.ceil(min);
   max = Math.floor(Math.max(min, max));
-  return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 /**

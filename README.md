@@ -1,6 +1,8 @@
-# @orkans/utilsjs `v4.4.0`
+# @orkans/utilsjs `v4.5.0`
 
-Bunch of scripts collected from all around the JS world.
+Bunch of scripts collected from all around the JS world
+
+[HOME](https://github.com/orkan) | [NPM](https://www.npmjs.com/package/@orkans/utilsjs) | [GITHUB](https://github.com/orkan/utilsjs)
 
 ## Installation
 
@@ -32,4 +34,4 @@ MIT
 
 ### Updated
 
-Sat, 15 Aug 2026 08:34:03 +02:00
+Wed, 19 Aug 2026 07:07:43 +02:00

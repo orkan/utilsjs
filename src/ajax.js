@@ -8,20 +8,13 @@ const _cache = {};
 const _loading = {};
 
 // ================================================================================================
-// DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA
+// DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA D
 // ================================================================================================
 export const cfg = { api: null, debug: false };
 
 // ================================================================================================
-// FUNCTIONS FUNCTIONS FUNCTIONS FUNCTIONS FUNCTIONS FUNCTIONS FUNCTIONS FUNCTIONS FUNCTIONS
+// FUNCTIONS FUNCTIONS FUNCTIONS FUNCTIONS FUNCTIONS FUNCTIONS FUNCTIONS FUNCTIONS FUNCTIONS FUNCTI
 // ================================================================================================
-
-/**
- * Show/hide debug messages.
- */
-export function debug(message, data = null) {
-  cfg.debug && utils.debug(message, data);
-}
 
 /**
  * Number of opened connections.
@@ -46,33 +39,45 @@ export function postForm(url, form) {
  * To get the contents use:
  * - PHP7: $_POST = file_get_contents('php://input');
  * - PHP8: [$_POST, $_FILES] = request_parse_body();
+ *
+ * AbortController:
+ * let controller;
+ * try {
+ *   controller && controller.abort();
+ *   controller = new AbortController();
+ *   ajax.fetchJson(url, body, {signal: controller.signal});
+ *   controller = null;
+ * }
+ * catch(e) {
+ *   if (e.name === 'AbortError') {
+ *     console.debug(`setHover(${cacheKey}) aborted!`);
+ *   }
+ * }
  */
 export async function fetchJson(url, body = null, opts = {}) {
-  let data, error;
+  let data, error, exception;
 
-  opts = {
+  opts.ajax = { cache: '', ...opts?.ajax };
+  opts.fetch = utils.objFilter({
     ...{
-      ajax: {
-        cache: '',
-      },
-      fetch: utils.objFilter({
-        headers: utils.objFilter({
-          'Content-Type': 'application/json',
-          'X-Api-Key': cfg.api,
-        }),
-        method: body ? 'POST' : 'GET',
-        body: body ? JSON.stringify(body) : null,
+      headers: utils.objFilter({
+        'Content-Type': 'application/json',
+        'X-Api-Key': cfg.api,
       }),
+      method: body ? 'POST' : 'GET',
+      body: body ? JSON.stringify(body) : null,
     },
-    ...opts,
-  };
+    ...opts?.fetch,
+  });
 
-  cfg.debug && debug('fetchJson() req:', { url, opts });
+  const cacheKey = opts.ajax.cache;
+
+  cfg.debug && console.debug(`fetchJson(${cacheKey}) request:`, { url, opts });
   url in _loading ? _loading[url]++ : (_loading[url] = 1);
 
-  if (opts.ajax.cache in _cache) {
-    cfg.debug && debug(`fetchJson() cache hit: ${opts.ajax.cache}`);
-    data = _cache[opts.ajax.cache];
+  if (cacheKey in _cache) {
+    cfg.debug && console.debug(`fetchJson(${cacheKey}) cache hit!`);
+    data = _cache[cacheKey];
   } else {
     try {
       const res = await fetch(url, opts.fetch);
@@ -80,16 +85,17 @@ export async function fetchJson(url, body = null, opts = {}) {
       data = JSON.parse(data); // ...or decode php response
       error = data.error ? `API: ${data.error}` : null;
       data = data.data;
-      if (opts.ajax.cache) {
-        _cache[opts.ajax.cache] = data;
+      if (cacheKey) {
+        _cache[cacheKey] = data;
       }
-    } catch (er) {
-      error = `JS: ${er.message}`;
+    } catch (e) {
+      error = `JS: ${e.message}`;
+      exception = e;
     }
   }
 
-  cfg.debug && debug('fetchJson res:', { data, error });
+  cfg.debug && console.debug(`fetchJson(${cacheKey}) response:`, { data, error });
   _loading[url]--;
 
-  return { data, error };
+  return { data, error, exception };
 }
