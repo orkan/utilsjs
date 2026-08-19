@@ -85,7 +85,7 @@ export async function fetchJson(url, body = null, opts = {}) {
       data = JSON.parse(data); // ...or decode php response
       error = data.error ? `API: ${data.error}` : null;
       data = data.data;
-      if (cacheKey) {
+      if (cacheKey && !error) {
         _cache[cacheKey] = data;
       }
     } catch (e) {

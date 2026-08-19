@@ -9,10 +9,10 @@
 export function version(key = '') {
   switch (key) {
     case 'long':
-      return 'UtilsJS v4.5.0 (c) 2026 Orkan';
+      return 'UtilsJS v4.6.0 (c) 2026 Orkan';
 
     case 'short':
-      return 'UtilsJS v4.5.0';
+      return 'UtilsJS v4.6.0';
 
     case 'app':
       return 'UtilsJS';
@@ -42,17 +42,17 @@ export function version(key = '') {
 
     // EEE, dd MMM yyyy HH:mm:ss XXX
     case 'dateRFC2822':
-      return 'Wed, 19 Aug 2026 07:07:43 +02:00';
+      return 'Wed, 19 Aug 2026 18:42:00 +02:00';
 
     // yyyy-MM-dd'T'HH:mm:ssXXX
     case 'dateRFC3339':
-      return '2026-08-19T07:07:43+02:00';
+      return '2026-08-19T18:42:00+02:00';
 
     case 'major':
       return '4';
 
     case 'minor':
-      return '5';
+      return '6';
 
     case 'patch':
       return '0';
@@ -61,5 +61,5 @@ export function version(key = '') {
       return '';
   }
 
-  return '4.5.0';
+  return '4.6.0';
 }
