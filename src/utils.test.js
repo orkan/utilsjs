@@ -2,7 +2,7 @@
  * This file is part of the @orkans/utilsjs package.
  * Copyright (c) 2023 Orkan <orkans+utilsjs@gmail.com>
  */
-import * as utils from '@orkans/utilsjs';
+import * as utils from './utils.js';
 
 /**
  * arrPadR()
@@ -145,3 +145,39 @@ test('rand()', () => {
   expect(utils.rand(22) === 22).toBeTruthy();
   expect(22 <= utils.rand(22, 44) <= 44).toBeTruthy();
 });
+
+/**
+ * timeString()
+ */
+utils.testDataSet(
+  'timeString()',
+  {
+    '14m 2s': {
+      tim: 14 * 60 + 2,
+      out: '14m 02s',
+    },
+    '37h 12m': {
+      tim: 37 * 3600 + 12 * 60,
+      out: '01d 13h 12m',
+    },
+    '0s': {
+      tim: 0,
+      out: '0s',
+    },
+    '8m': {
+      tim: 8 * 60,
+      out: '08m',
+    },
+    '1d': {
+      tim: 24 * 3600,
+      out: '01d',
+    },
+    '1d 27s': {
+      tim: 24 * 3600 + 27,
+      out: '01d 27s',
+    },
+  },
+  (o) => {
+    expect(utils.timeString(o.tim)).toEqual(o.out);
+  }
+);

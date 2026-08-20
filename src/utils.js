@@ -156,6 +156,36 @@ export async function usleep(ms) {
 }
 
 /**
+ * Format time.
+ */
+export function timeString(seconds) {
+  if(!seconds) {
+    return '0s';
+  }
+
+  const all = {
+    d: parseInt(seconds / (3600 * 24)),
+    h: parseInt((seconds / 3600) % 24),
+    m: parseInt((seconds / 60) % 60),
+    s: parseInt(seconds % 60),
+  };
+
+  const obj = objMap(all, (v, k) => {
+    if (v === 0) {
+      return null;
+    } else if (v < 10) {
+      v = '0' + v;
+    }
+    return `${v}${k}`;
+  });
+
+  const arr = Object.values(obj).filter((v) => v);
+  const out = arr.join(' ');
+
+  return out;
+}
+
+/**
  * BODY:onload() callback.
  */
 export function wndOnLoad(fn) {
